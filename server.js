@@ -10,6 +10,13 @@ app.use(cors());
 
 const PORT = 8080;
 
+const scraper = require('./utils/launchScraper')
+
+scraper();
+
+
+
+
 
 const getMovies = () => {
     const movies = fs.readFileSync('./data/movieData.json')
@@ -59,6 +66,7 @@ const saveMovies = (movies) => {
 //Routes
 const movieRoutes = require('./routes/movies');
 app.use('/browse', movieRoutes);
+
 
 
 //Listen
