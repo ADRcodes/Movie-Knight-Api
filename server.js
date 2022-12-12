@@ -1,32 +1,27 @@
-const cors = require('cors');
-const express = require('express');
+const cors = require("cors")
+const express = require("express")
 const app = express()
-const fs = require("fs");
-const streamingAvailability = require('./apis/apis')
-const genreConvert = require('./utils/genreConvert')
+const fs = require("fs")
+const streamingAvailability = require("./apis/apis")
+const genreConvert = require("./utils/genreConvert")
 app.use(express.json())
-app.use(express.static('./public'))
-app.use(cors());
+app.use(express.static("./public"))
+app.use(cors())
 
-const PORT = 8080;
+const PORT = 8000
 
-const scraper = require('./utils/launchScraper')
+const scraper = require("./utils/launchScraper")
 
-scraper();
-
-
-
-
+scraper()
 
 const getMovies = () => {
-    const movies = fs.readFileSync('./data/movieData.json')
-    return JSON.parse(movies)
+  const movies = fs.readFileSync("./data/movieData.json")
+  return JSON.parse(movies)
 }
 
 const saveMovies = (movies) => {
-    fs.writeFileSync('./data/movieData.json', JSON.stringify(movies))
+  fs.writeFileSync("./data/movieData.json", JSON.stringify(movies))
 }
-
 
 // ----------- To update movie data, uncomment below and edit lines 8 - 11 in apis.js ----------
 
@@ -62,14 +57,11 @@ const saveMovies = (movies) => {
 //     }
 // })
 
-
 //Routes
-const movieRoutes = require('./routes/movies');
-app.use('/browse', movieRoutes);
-
-
+const movieRoutes = require("./routes/movies")
+app.use("/browse", movieRoutes)
 
 //Listen
 app.listen(PORT, () => {
-    console.log("server is running on port " + PORT)
+  console.log("server is running on port " + PORT)
 })
